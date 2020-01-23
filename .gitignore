@@ -1,0 +1,4 @@
+.nownode_modules/
+.now/
+now.json
+node_modules/
