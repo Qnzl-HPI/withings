@@ -1,3 +1,4 @@
+const authCheck = require(`./_lib/auth`)
 const moment = require(`moment-timezone`)
 const fetch = require(`node-fetch`)
 const auth = require(`@qnzl/auth`)
@@ -20,18 +21,8 @@ const measurementKeys = {
   pulseWaveVelocity: 91
 }
 
-module.exports = async (req, res) => {
-  const {
-    authorization
-  } = req.headers
-
+const handler = async (req, res) => {
   const withingsKey = req.headers[`x-withings-access-token`]
-
-  const isTokenValid = auth.checkJWT(authorization, CLAIMS.withings.dump, `watchers`, process.env.ISSUER)
-
-  if (!isTokenValid) {
-    return res.status(401).send()
-  }
 
   let measurements
   let activities
@@ -70,4 +61,8 @@ module.exports = async (req, res) => {
   }
 
   return res.json({ measurements, activities })
+}
+
+module.exports = (req, res) => {
+  return authCheck(CLAIMS.withings.dump)(req, res, handler)
 }

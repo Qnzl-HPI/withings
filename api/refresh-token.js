@@ -2,7 +2,6 @@ const { URLSearchParams } = require(`url`)
 const fetch = require(`node-fetch`)
 
 module.exports = async (req, res) => {
-
   const { refreshToken } = req.query
 
   const body = new URLSearchParams()
