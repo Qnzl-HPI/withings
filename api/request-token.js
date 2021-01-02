@@ -1,29 +1,26 @@
-const { URLSearchParams } = require(`url`)
+const authCheck = require(`./_lib/auth`)
+const moment = require(`moment`)
 const fetch = require(`node-fetch`)
+const auth = require(`@qnzl/auth`)
 
-module.exports = async (req, res) => {
-  const { code } = req.query
+const { CLAIMS } = auth
 
-  const body = new URLSearchParams()
-  body.append(`code`, code)
-  body.append(`grant_type`, `authorization_code`)
-  body.append(`client_id`, process.env.WITHINGS_CLIENT_ID)
-  body.append(`client_secret`, process.env.WITHINGS_CLIENT_SECRET)
-  body.append(`redirect_uri`, `${process.env.WITHINGS_REDIRECT_URI}/api/request-token`)
+const clientId = process.env.WITHINGS_CLIENT_ID
 
-  fetch(`https://account.withings.com/oauth2/token`, {
-      method: `POST`,
-      headers: {
-        'Content-Type': `application/x-www-form-urlencoded; charset=UTF-8`
-      },
-      body
-    })
-    .then(async (response) => {
-      const token = await response.json()
+const handler = async (req, res) => {
+  const {
+    projectId = ''
+  } = req.query
 
-      // TODO Do something with the token
-      console.log(`got withings token: ${token}`)
+  const scopes = `user.info,user.metrics,user.activity,user.sleepevents`
+  const redirectUri = `${process.env.WITHINGS_REDIRECT_URI}/api/request-token`
 
-      return res.status(200).send(token)
-    })
+  const requestUrl = `https://account.withings.com/oauth2_user/authorize2?response_type=code&client_id=${clientId}&state=${moment().valueOf()}&scope=${scopes}&redirect_uri=${redirectUri}`
+
+  return res.send(requestUrl)
 }
+
+module.exports = (req, res) => {
+  return authCheck(CLAIMS.withings.dump)(req, res, handler)
+}
+
