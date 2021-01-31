@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   body.append(`grant_type`, `authorization_code`)
   body.append(`client_id`, process.env.WITHINGS_CLIENT_ID)
   body.append(`client_secret`, process.env.WITHINGS_CLIENT_SECRET)
-  body.append(`redirect_uri`, `${process.env.WITHINGS_REDIRECT_URI}/api/request-token`)
+  body.append(`redirect_uri`, `${process.env.WITHINGS_REDIRECT_URI}`)
 
   fetch(`https://account.withings.com/oauth2/token`, {
       method: `POST`,
