@@ -1,4 +1,4 @@
-## @watchers/withings
+## withings
 
 ### Setup
 
