@@ -15,7 +15,6 @@ const handler = async (req, res) => {
     projectId = ''
   } = req.query
 
-  console.log("VALUE:", WITHINGS_REDIRECT_URI)
   const scopes = `user.info,user.metrics,user.activity,user.sleepevents`
 
   const requestUrl = `https://account.withings.com/oauth2_user/authorize2?response_type=code&client_id=${WITHINGS_CLIENT_ID}&state=${moment().valueOf()}&scope=${scopes}&redirect_uri=${WITHINGS_REDIRECT_URI}`
