@@ -1,6 +1,6 @@
 {
-  "name": "@qnzl/withings",
-  "version": "1.0.0",
+  "name": "@hpi/withings",
+  "version": "0.0.1",
   "bin": {
     "typeform": "bin/withings.js"
   },
@@ -10,12 +10,8 @@
   "author": "Madeline <maddie@qnzl.co>",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "@qnzl/auth": "^1.0.13",
     "commander": "^7.1.0",
     "dayjs": "^1.10.4",
-    "jose": "^1.17.2",
-    "moment": "^2.24.0",
-    "moment-timezone": "^0.5.28",
     "node-fetch": "^2.6.0",
     "server": "^1.0.32"
   },
