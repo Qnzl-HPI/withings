@@ -1,18 +1,22 @@
-## withings
+## @hpi/withings
 
-### Setup
+### Installation
 
-`npm install`
+```bash
+git clone git@github.com:Qnzl-HPI/withings.git
 
-If you don't want to adapt the functions to another service, you need to install [Vercel](https://vercel.com/docs/cli)
+# Install node requirements
+npm install
 
-### Running
+# Install data access layer
+pip3 install .
 
-`vercel dev --listen [port]` / `npm start`
+# Build the executables
+npm run build
 
-### Deploying
+```
 
-Follow instructions for setting up Vercel
+### Usage
 
-`vercel --prod`
+Copy the built executables to /usr/bin or similar location. If you use /usr/local/bin instead, cron will not be able to run
 
