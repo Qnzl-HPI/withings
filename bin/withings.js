@@ -127,7 +127,7 @@ async function exchangeToken({
             expires_in,
           } = await res.json()
 
-          console.log(`${access_token}\n${refresh_token}\n${expires_in}`)
+          process.stdout.write(`${access_token},${refresh_token},${expires_in}`)
 
           return process.exit(0)
         } catch (e) {
@@ -167,7 +167,7 @@ async function refreshToken({
       expires_in,
     } = await res.json()
 
-    console.log(`${access_token},${refresh_token},${expires_in}`)
+    process.stdout.write(`${access_token},${refresh_token},${expires_in}`)
 
     return process.exit(0)
   } catch (e) {
@@ -204,7 +204,7 @@ async function dump({
 
     measurements = await Promise.all(measurementResults)
 
-
+    // TODO Refresh token if failed
     const activityResponse = await fetch(`https://wbsapi.withings.net/v2/measure?action=getintradayactivity&startdate=${dayjs().startOf(`day`).unix()}&enddate=${dayjs().endOf(`day`).unix()}`, {
         method: `GET`,
         headers: {
