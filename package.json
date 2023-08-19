@@ -2,7 +2,7 @@
   "name": "@hpi/withings",
   "version": "0.0.1",
   "bin": {
-    "typeform": "bin/withings.js"
+    "withings": "bin/withings.js"
   },
   "scripts": {
     "build": "pkg bin/withings.js --out-path pkg/"
